@@ -2,10 +2,131 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Souleymane Apps</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #ff5722;
+      font-size: 2.4rem;
+    }
+
+    h2 {
+      color: #444;
+      margin-top: 30px;
+    }
+
+    p {
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .app {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .app:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .app h3 {
+      margin-top: 0;
+      color: #ff5722;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ff5722;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Bienvenue 👋</h1>
-  <p>Site officiel des applications de Souleymane.</p>
+  <div class="container">
+    <div class="card">
+      <h1>👋 Souleymane Apps</h1>
+      <p>
+        Bienvenue sur le site officiel de <strong>Souleymane Kaghambega</strong>,
+        développeur mobile spécialisé dans les applications Android utiles,
+        rapides et accessibles.
+      </p>
+
+      <span class="badge">Flutter • Android • Mobile Apps</span>
+
+      <h2>📱 Applications publiées</h2>
+
+      <div class="apps">
+        <div class="app">
+          <h3>Résultats Concours</h3>
+          <p>
+            Application permettant de consulter rapidement les résultats de concours
+            et examens officiels.
+          </p>
+        </div>
+
+        <div class="app">
+          <h3>ResultatExpress</h3>
+          <p>
+            Accès rapide et simplifié aux résultats, avec une interface claire
+            et une navigation fluide.
+          </p>
+        </div>
+      </div>
+
+      <h2>📩 Contact</h2>
+      <p>
+        Email : <strong>souleymanesk01@gmail.com</strong><br>
+        Développeur Android & Flutter
+      </p>
+    </div>
+
+    <footer>
+      © 2026 Souleymane Apps — Tous droits réservés
+    </footer>
+  </div>
 </body>
 </html>
