@@ -1,86 +1,154 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Souleymane Apps</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Souleymane Kaghambega • Apps & Projets</title>
 
   <style>
+    :root {
+      --primary: #ff5722;
+      --secondary: #ff9800;
+      --dark: #2c2c2c;
+      --light: #f9f9f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ff9800, #ff5722);
-      color: #333;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: var(--dark);
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 50px 20px;
     }
 
     .card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 30px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      background: white;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.18);
     }
 
-    h1 {
-      margin-top: 0;
-      color: #ff5722;
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .header img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      object-fit: cover;
+    }
+
+    .header h1 {
+      margin: 0;
       font-size: 2.4rem;
+      color: var(--primary);
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      font-size: 1.05rem;
+      color: #555;
+    }
+
+    .badges {
+      margin-top: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-top: 6px;
     }
 
     h2 {
-      color: #444;
-      margin-top: 30px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 1.6rem;
     }
 
-    p {
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
+    /* ===== APPS ===== */
     .apps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
       margin-top: 20px;
     }
 
     .app {
+      border-radius: 14px;
+      padding: 22px;
+      background: var(--light);
+      text-decoration: none;
+      color: inherit;
       border: 1px solid #eee;
-      border-radius: 12px;
-      padding: 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.25s ease;
     }
 
     .app:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border-color: var(--primary);
     }
 
     .app h3 {
       margin-top: 0;
-      color: #ff5722;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .app p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: #fff3ef;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 20px;
+    }
+
+    .contact strong {
+      color: var(--primary);
     }
 
     footer {
       text-align: center;
       margin-top: 40px;
-      color: #777;
       font-size: 0.9rem;
+      color: #eee;
     }
 
-    .badge {
-      display: inline-block;
-      background: #ff5722;
-      color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      margin-top: 10px;
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -88,64 +156,64 @@
 <body>
   <div class="container">
     <div class="card">
-      <h1> souleymane/ mes projets </h1>
-      <img src="https://lh3.googleusercontent.com/3ge-FjQPgyU5rP3zQjlz3ydojWStLN-k_alabw0VPwswZrXmw2VGZ3yM71mVedzfEEc" width="100" height="100" alt="souleymane_image">
-      <p>
-        Bienvenue sur le site officiel de <strong>Souleymane Kaghambega</strong>,
-        développeur mobile spécialisé dans les applications Android utiles,
-        rapides et accessibles.
+
+      <!-- ===== HEADER ===== -->
+      <div class="header">
+        <img src="https://lh3.googleusercontent.com/3ge-FjQPgyU5rP3zQjlz3ydojWStLN-k_alabw0VPwswZrXmw2VGZ3yM71mVedzfEEc" alt="Souleymane Kaghambega">
+        <div>
+          <h1>Souleymane Kaghambega</h1>
+          <p>Développeur mobile • Android & Flutter</p>
+          <div class="badges">
+            <span class="badge">Flutter</span>
+            <span class="badge">Android</span>
+            <span class="badge">Mobile Apps</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DESCRIPTION ===== -->
+      <p style="margin-top: 25px;">
+        Bienvenue sur mon espace officiel.  
+        Je développe des applications Android utiles, rapides et accessibles,
+        orientées vers des besoins réels et concrets.
       </p>
 
-      <span class="badge">Flutter • Android • Mobile Apps</span>
-
+      <!-- ===== APPS ===== -->
       <h2>📱 Applications publiées</h2>
 
       <div class="apps">
-        <a href="https://play.google.com/store/apps/details?id=com.resultats.resultatexpress&pcampaignid=web_share">
-        <div class="app">
+        <a class="app" href="https://play.google.com/store/apps/details?id=com.resultats.resultatexpress&pcampaignid=web_share">
           <h3>RésultatExpress</h3>
-          <p>
-            Application permettant de consulter rapidement les résultats de concours
-            et examens officiels.
-          </p>
-        </div>
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.bourseetude.boursy&pcampaignid=web_share">
-          <div class="app">
-          <h3>Boursy</h3>
-          <p>
-            Accès à toutes les bourses d'étude partout au monde
-          </p>
-        </div>
+          <p>Consultez rapidement les résultats de concours et examens officiels.</p>
         </a>
 
-          <a href="https://play.google.com/store/apps/details?id=com.rapidio.rapidfind.rapidio&pcampaignid=web_share">
-            <div class="app">
+        <a class="app" href="https://play.google.com/store/apps/details?id=com.bourseetude.boursy&pcampaignid=web_share">
+          <h3>Boursy</h3>
+          <p>Toutes les bourses d’étude à travers le monde, en un seul endroit.</p>
+        </a>
+
+        <a class="app" href="https://play.google.com/store/apps/details?id=com.rapidio.rapidfind.rapidio&pcampaignid=web_share">
           <h3>Rapidios</h3>
-          <p>
-            Votre magasin de fichiers utiles ou favoris 
-          </p>
-        </div>
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=com.docmark.slymo&pcampaignid=web_share">
-        <div class="app">
+          <p>Votre bibliothèque personnelle de fichiers utiles et favoris.</p>
+        </a>
+
+        <a class="app" href="https://play.google.com/store/apps/details?id=com.docmark.slymo&pcampaignid=web_share">
           <h3>Docmark</h3>
-          <p>
-            Signature rapide sur vos documents pdf de plusieurs pages 
-          </p>
-        </div>
-          </a>
+          <p>Signez rapidement vos documents PDF, même multi-pages.</p>
+        </a>
       </div>
 
+      <!-- ===== CONTACT ===== -->
       <h2>📩 Contact</h2>
-      <p>
-        Email : <strong>souleymanesk01@gmail.com</strong><br>
+      <div class="contact">
+        Email : <strong>souleymanesk01@gmail.com</strong><br />
         Développeur Android & Flutter
-      </p>
+      </div>
+
     </div>
 
     <footer>
-      © 2026 Souleymane/ Mes projets — Tous droits réservés
+      © 2026 Souleymane Kaghambega — Tous droits réservés
     </footer>
   </div>
 </body>
