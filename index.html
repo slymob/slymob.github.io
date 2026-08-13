@@ -52,6 +52,18 @@
       position: relative;
     }
 
+    /* Classes pour l'effet Fade-in au scroll */
+    .fade-element {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-element.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* Background Glow Effects */
     .glow {
       position: absolute;
@@ -234,7 +246,7 @@
       margin-bottom: 4px;
     }
 
-    .profile- info p {
+    .profile-info p {
       color: var(--text-muted);
       font-size: 0.9rem;
     }
@@ -313,7 +325,11 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow);
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s, background 0.3s, opacity 0.4s ease;
+    }
+
+    .project-card.hidden {
+      display: none !important;
     }
 
     .project-card:hover {
@@ -449,7 +465,7 @@
   <div class="container">
     
     <!-- TOP NAVIGATION -->
-    <nav class="top-nav">
+    <nav class="top-nav fade-element">
       <div class="logo">
         <i class="fa-solid fa-code"></i> Souleymane.dev
       </div>
@@ -462,7 +478,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero">
+    <section class="hero fade-element">
       <div class="hero-card">
         <h1>Salut, je suis <span>Souleymane Kaghambega</span></h1>
         <p>Étudiant en Mathématiques et Développeur d'applications mobiles & web passionné. Je conçois des solutions numériques robustes, intuitives et orientées vers l'impact éducatif et professionnel.</p>
@@ -500,7 +516,7 @@
     </section>
 
     <!-- SECTION PROJETS -->
-    <div class="section-header" id="projets">
+    <div class="section-header fade-element" id="projets">
       <h2>Mes Réalisations & Projets</h2>
       <div class="filter-tabs">
         <button class="filter-btn active" onclick="filterProjects('all')">Tous</button>
@@ -510,7 +526,7 @@
     </div>
 
     <!-- GRILLE DES 8 PROJETS -->
-    <div class="projects-grid" id="projectsGrid">
+    <div class="projects-grid fade-element" id="projectsGrid">
       
       <!-- Boursy -->
       <div class="project-card" data-category="educatif mobile">
@@ -595,7 +611,7 @@
     </div>
 
     <!-- CURSUS & EXPÉRIENCE -->
-    <div class="grid-duo">
+    <div class="grid-duo fade-element">
       
       <!-- Éducation -->
       <div class="info-card">
@@ -649,7 +665,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="fade-element">
       © 2026 Souleymane Kaghambega • Tous droits réservés.
     </footer>
 
@@ -680,12 +696,34 @@
       cards.forEach(card => {
         const categories = card.getAttribute('data-category');
         if (category === 'all' || categories.includes(category)) {
-          card.style.display = 'flex';
+          card.classList.remove('hidden');
         } else {
-          card.style.display = 'none';
+          card.classList.add('hidden');
         }
       });
     }
+
+    // Animation au défilement (Fade-in dynamique)
+    document.addEventListener("DOMContentLoaded", function() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Animation jouée une seule fois par élément
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-element').forEach(el => {
+        observer.observe(el);
+      });
+    });
   </script>
 </body>
 </html>
