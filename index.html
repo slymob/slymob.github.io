@@ -1,233 +1,291 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Souleymane Kaghambega • Développeur Mobile & Web</title>
+  <!-- FontAwesome pour les icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #ff5722;
-      --secondary: #ff9800;
-      --dark: #2c2c2c;
-      --light: #f7f7f7;
-      --bg-gradient: linear-gradient(135deg, #ff9800, #ff5722);
-      --card-bg: #ffffff;
-      --text-color: #2c2c2c;
-      --text-muted: #555555;
-      --sub-card: #f7f7f7;
-      --border-color: #eee;
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #f97316;
+      --primary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      --accent: #38bdf8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+      --hover-card: rgba(51, 65, 85, 0.8);
     }
 
-    [data-theme="dark"] {
-      --primary: #ff7043;
-      --secondary: #ffa726;
-      --dark: #f1f1f1;
-      --light: #1e1e1e;
-      --bg-gradient: linear-gradient(135deg, #1a1a1a, #2d130a);
-      --card-bg: #121212;
-      --text-color: #f1f1f1;
-      --text-muted: #aaa;
-      --sub-card: #1e1e1e;
-      --border-color: #2c2c2c;
+    [data-theme="light"] {
+      --bg-color: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #ea580c;
+      --primary-gradient: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+      --accent: #0284c7;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+      --hover-card: rgba(255, 255, 255, 1);
     }
 
-    * { box-sizing: border-box; transition: background 0.3s ease, color 0.3s ease; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+    }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-color);
+      background-color: var(--bg-color);
+      color: var(--text-main);
       min-height: 100vh;
-      padding: 20px 0;
+      overflow-x: hidden;
+      position: relative;
     }
 
+    /* Background Glow Effects */
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: var(--primary);
+      filter: blur(150px);
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.15;
+    }
+    .glow-1 { top: -100px; left: -100px; }
+    .glow-2 { bottom: 100px; right: -100px; background: var(--accent); }
+
+    /* Layout principal */
     .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
-    /* Theme Switcher */
-    .top-bar {
+    /* Top Nav / Header bar */
+    .top-nav {
       display: flex;
-      justify-content: flex-end;
-      margin-bottom: 15px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 15px 30px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
     }
 
     .theme-toggle {
       background: var(--card-bg);
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.05);
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      padding: 45px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
       border: 1px solid var(--border-color);
-    }
-
-    /* ===== HEADER ===== */
-    .header {
+      color: var(--text-main);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 30px;
-      flex-wrap: wrap;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
     }
-
-    .header img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 4px solid var(--primary);
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(255,87,34,0.3);
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 2.6rem;
+    .theme-toggle:hover {
+      transform: scale(1.1);
       color: var(--primary);
     }
 
-    .header p {
-      margin: 6px 0 0;
-      font-size: 1.15rem;
-      color: var(--text-muted);
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      margin-bottom: 40px;
     }
 
-    .badges {
-      margin-top: 12px;
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-card, .side-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero-card h1 span {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-card p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 30px;
     }
 
     .badge {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--primary);
       padding: 6px 14px;
-      border-radius: 20px;
+      border-radius: 30px;
       font-size: 0.85rem;
-      margin-right: 6px;
-      margin-top: 6px;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid rgba(249, 115, 22, 0.2);
     }
 
-    /* ===== BUTTONS ===== */
-    .actions {
-      margin-top: 22px;
+    .btn-group {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
     .btn {
       padding: 12px 24px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 0.95rem;
+      border-radius: 14px;
       font-weight: 600;
-      transition: 0.25s;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
       border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: var(--primary-gradient);
       color: white;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
     }
 
     .btn-outline {
-      border: 2px solid var(--primary);
-      color: var(--primary);
       background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
     }
 
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255,87,34,0.25);
     }
 
-    .intro-text {
-      margin-top: 30px;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-    }
-
-    h2 {
-      margin-top: 50px;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: var(--text-color);
+    /* Side Card / Profile */
+    .profile-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    /* ===== STATS ===== */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      margin-top: 25px;
+      margin-bottom: 25px;
     }
 
-    .stat {
-      background: var(--sub-card);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      border: 1px solid var(--border-color);
-      transition: transform 0.3s;
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
     }
 
-    .stat:hover {
-      transform: translateY(-5px);
+    .profile-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
     }
 
-    .stat strong {
-      font-size: 2.2rem;
-      color: var(--primary);
-    }
-
-    .stat span {
+    .profile- info p {
+      color: var(--text-muted);
       font-size: 0.9rem;
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.95rem;
       color: var(--text-muted);
     }
 
-    /* ===== FILTRES PROJETS ===== */
-    .filter-buttons {
+    .contact-info-list div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-info-list i {
+      color: var(--primary);
+      width: 20px;
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 50px 0 25px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    /* Filtres Projets */
+    .filter-tabs {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
     .filter-btn {
-      padding: 6px 16px;
-      border-radius: 20px;
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
-      background: var(--sub-card);
       color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
       font-size: 0.85rem;
@@ -239,322 +297,395 @@
       border-color: var(--primary);
     }
 
-    /* ===== APPS ===== */
-    .apps {
+    /* Grille Projets */
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-    }
-
-    .app {
-      border-radius: 16px;
-      padding: 24px;
-      background: var(--sub-card);
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid var(--border-color);
-      transition: 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .app:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      border-color: var(--primary);
-    }
-
-    .app h3 {
-      margin-top: 0;
-      color: var(--primary);
-      font-size: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .app p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-    }
-
-    .app-link {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* ===== SERVICES ===== */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    .service {
-      background: var(--sub-card);
-      padding: 22px;
-      border-radius: 16px;
+    .project-card {
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
-      font-weight: 500;
+      border-radius: 20px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      background: var(--hover-card);
+      border-color: var(--primary);
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(249, 115, 22, 0.1);
+      border-radius: 12px;
       display: flex;
       align-items: center;
-      gap: 15px;
-    }
-
-    .service i {
-      font-size: 1.5rem;
+      justify-content: center;
       color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 20px;
     }
 
-    /* ===== CONTACT FORM ===== */
-    .contact-grid {
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .project-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Grille Expérience / Éducation / Compétences */
+    .grid-duo {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
+      margin-top: 40px;
     }
 
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
+    @media (max-width: 900px) {
+      .grid-duo { grid-template-columns: 1fr; }
     }
 
-    .contact-info {
-      background: var(--sub-card);
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid var(--border-color);
-    }
-
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 12px 16px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
+    .info-card {
       background: var(--card-bg);
-      color: var(--text-color);
-      font-family: inherit;
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: var(--shadow);
     }
 
-    .contact-form input:focus, .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--primary);
+    .info-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--primary);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item h4 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item span {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .skills-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .skill-pill {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 60px;
+      padding: 30px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-    }
-
-    @media (max-width: 600px) {
-      .header {
-        flex-direction: column;
-        text-align: center;
-      }
-      .actions {
-        justify-content: center;
-      }
     }
   </style>
 </head>
-
 <body>
-<div class="container">
 
-  <!-- Top bar pour changer le thème -->
-  <div class="top-bar">
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
-      <i class="fa-solid fa-moon" id="themeIcon"></i> <span id="themeText">Mode Sombre</span>
-    </button>
-  </div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
 
-  <div class="card">
-
-    <!-- ===== HEADER ===== -->
-    <div class="header">
-      <img src="https://lh3.googleusercontent.com/3ge-FjQPgyU5rP3zQjlz3ydojWStLN-k_alabw0VPwswZrXmw2VGZ3yM71mVedzfEEc" alt="Souleymane Kaghambega">
-      <div>
-        <h1>Souleymane Kaghambega</h1>
-        <p>Développeur Mobile & Web • Expert Flutter & Android</p>
-
-        <div class="badges">
-          <span class="badge">Flutter</span>
-          <span class="badge">Dart</span>
-          <span class="badge">Supabase</span>
-          <span class="badge">Firebase</span>
-          <span class="badge">UI/UX</span>
-        </div>
-
-        <div class="actions">
-          <a href="mailto:souleymanesk01@gmail.com" class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Mon CV</a>
-          <a href="#projets" class="btn btn-outline"><i class="fa-solid fa-rocket"></i> Mes projets</a>
-          <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Me contacter</a>
-        </div>
-      </div>
-    </div>
-
-    <p class="intro-text">
-      Développeur passionné spécialisé dans la conception d’applications mobiles performantes et multiplateformes. 
-      Je transforme des idées complexes en expériences utilisateur fluides, modernes et connectées au cloud.
-    </p>
-
-    <!-- ===== STATS ===== -->
-    <div class="stats">
-      <div class="stat">
-        <strong>5+</strong><br>
-        <span>Applications publiées</span>
-      </div>
-      <div class="stat">
-        <strong>10k+</strong><br>
-        <span>Téléchargements</span>
-      </div>
-      <div class="stat">
-        <strong>3+</strong><br>
-        <span>Années d’expérience</span>
-      </div>
-    </div>
-
-    <!-- ===== APPS ===== -->
-    <h2 id="projets"><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary);"></i> Applications Publiées</h2>
+  <div class="container">
     
-    <!-- Filtres interactifs -->
-    <div class="filter-buttons">
-      <button class="filter-btn active" onclick="filterApps('all')">Tous</button>
-      <button class="filter-btn" onclick="filterApps('official')">Institutionnel & Services</button>
-      <button class="filter-btn" onclick="filterApps('tools')">Outils & Productivité</button>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+      <div class="logo">
+        <i class="fa-solid fa-code"></i> Souleymane.dev
+      </div>
+      <div class="nav-actions">
+        <a href="mailto:souleymanesk01@gmail.com" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Me contacter</a>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Changer le thème">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Salut, je suis <span>Souleymane Kaghambega</span></h1>
+        <p>Étudiant en Mathématiques et Développeur d'applications mobiles & web passionné. Je conçois des solutions numériques robustes, intuitives et orientées vers l'impact éducatif et professionnel.</p>
+        
+        <div class="badge-list">
+          <span class="badge">Flutter & Dart</span>
+          <span class="badge">Développement Mobile</span>
+          <span class="badge">Mathématiques & Analyse</span>
+          <span class="badge">PHP / MySQL</span>
+        </div>
+
+        <div class="btn-group">
+          <a href="#projets" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> Voir mes projets</a>
+          <a href="mailto:souleymanesk01@gmail.com" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Envoyer un email</a>
+        </div>
+      </div>
+
+      <!-- SIDE CARD / CONTACT INFO -->
+      <div class="side-card">
+        <div class="profile-header">
+          <img src="https://lh3.googleusercontent.com/3ge-FjQPgyU5rP3zQjlz3ydojWStLN-k_alabw0VPwswZrXmw2VGZ3yM71mVedzfEEc" alt="Souleymane Kaghambega" class="profile-avatar">
+          <div class="profile-info">
+            <h3>Souleymane Kaghambega</h3>
+            <p>Développeur Mobile & Étudiant</p>
+          </div>
+        </div>
+
+        <div class="contact-info-list">
+          <div><i class="fa-solid fa-location-dot"></i> Bobo-Dioulasso, Secteur 24, Burkina Faso</div>
+          <div><i class="fa-solid fa-envelope"></i> souleymanesk01@gmail.com</div>
+          <div><i class="fa-solid fa-phone"></i> +226 65548582 / 66052619</div>
+          <div><i class="fa-solid fa-graduation-cap"></i> Licence de Mathématiques (Univ. Nazi Boni)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION PROJETS -->
+    <div class="section-header" id="projets">
+      <h2>Mes Réalisations & Projets</h2>
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterProjects('all')">Tous</button>
+        <button class="filter-btn" onclick="filterProjects('mobile')">Mobile / Apps</button>
+        <button class="filter-btn" onclick="filterProjects('educatif')">Éducation & Examens</button>
+      </div>
     </div>
 
-    <div class="apps" id="appsGrid">
-      <a class="app" data-category="official" href="https://play.google.com/store/apps/details?id=com.resultats.resultatexpress" target="_blank">
+    <!-- GRILLE DES 8 PROJETS -->
+    <div class="projects-grid" id="projectsGrid">
+      
+      <!-- Boursy -->
+      <div class="project-card" data-category="educatif mobile">
         <div>
-          <h3>Résultats Concours-examens <i class="fa-brands fa-google-play" style="font-size:1rem;"></i></h3>
-          <p>Plateforme centralisée pour la consultation rapide et officielle des résultats d’examens et concours.</p>
+          <div class="project-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3>Boursy</h3>
+          <p>Application destinée aux élèves et étudiants pour rechercher des bourses d’études et opportunités de financement.</p>
         </div>
-        <span class="app-link">Voir sur Play Store <i class="fa-solid fa-arrow-right"></i></span>
-      </a>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
 
-      <a class="app" data-category="official" href="https://play.google.com/store/apps/details?id=com.bourseetude.boursy" target="_blank">
+      <!-- Résultats Concours -->
+      <div class="project-card" data-category="educatif mobile">
         <div>
-          <h3>Boursy <i class="fa-brands fa-google-play" style="font-size:1rem;"></i></h3>
-          <p>Application d'information sur les bourses d’étude internationales et opportunités académiques.</p>
+          <div class="project-icon"><i class="fa-solid fa-square-poll-vertical"></i></div>
+          <h3>Résultats Concours – Examens</h3>
+          <p>Application permettant de consulter rapidement les résultats de concours et d’examens nationaux.</p>
         </div>
-        <span class="app-link">Voir sur Play Store <i class="fa-solid fa-arrow-right"></i></span>
-      </a>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
 
-      <a class="app" data-category="tools" href="https://play.google.com/store/apps/details?id=com.rapidio.rapidfind.rapidio" target="_blank">
+      <!-- Fasojob -->
+      <div class="project-card" data-category="mobile">
         <div>
-          <h3>Rapidios <i class="fa-brands fa-google-play" style="font-size:1rem;"></i></h3>
-          <p>Solution intelligente pour la gestion et l'optimisation des fichiers et documents personnels.</p>
+          <div class="project-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <h3>Fasojob</h3>
+          <p>Application de recherche d’emplois et d’opportunités professionnelles pour dynamiser l'insertion locale.</p>
         </div>
-        <span class="app-link">Voir sur Play Store <i class="fa-solid fa-arrow-right"></i></span>
-      </a>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
 
-      <a class="app" data-category="tools" href="https://play.google.com/store/apps/details?id=com.docmark.slymo" target="_blank">
+      <!-- Docmark -->
+      <div class="project-card" data-category="mobile">
         <div>
-          <h3>Docmark <i class="fa-brands fa-google-play" style="font-size:1rem;"></i></h3>
-          <p>Outil mobile puissant pour la manipulation, l'annotation et la signature rapide de documents PDF.</p>
+          <div class="project-icon"><i class="fa-solid fa-file-signature"></i></div>
+          <h3>Docmark</h3>
+          <p>Application mobile innovante permettant de signer des documents numériques simplement, rapidement et multi-pages.</p>
         </div>
-        <span class="app-link">Voir sur Play Store <i class="fa-solid fa-arrow-right"></i></span>
-      </a>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Rapidios -->
+      <div class="project-card" data-category="mobile">
+        <div>
+          <div class="project-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Rapidios</h3>
+          <p>Application permettant d’avoir un accès rapide à ses fichiers fréquemment utilisés pour les ouvrir facilement au quotidien.</p>
+        </div>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- GOAT Sport -->
+      <div class="project-card" data-category="mobile">
+        <div>
+          <div class="project-icon"><i class="fa-solid fa-futbol"></i></div>
+          <h3>GOAT Sport</h3>
+          <p>Gestion et suivi de compétitions sportives complètes (équipes, joueurs, managers, arbitres, matchs, résultats et direct).</p>
+        </div>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Le Club des Bosseurs -->
+      <div class="project-card" data-category="educatif">
+        <div>
+          <div class="project-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+          <h3>Le Club des Bosseurs</h3>
+          <p>Plateforme éducative et communautaire proposant ressources, documents, actualités, bourses, concours et interactions.</p>
+        </div>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Formulia -->
+      <div class="project-card" data-category="educatif mobile">
+        <div>
+          <div class="project-icon"><i class="fa-solid fa-square-root-variable"></i></div>
+          <h3>Formulia</h3>
+          <p>Application d’apprentissage des formules mathématiques, conçue spécifiquement pour les élèves du CEP, BEPC et BAC.</p>
+        </div>
+        <a href="#" class="project-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
     </div>
 
-    <!-- ===== SERVICES ===== -->
-    <h2><i class="fa-solid fa-toolbox" style="color:var(--primary);"></i> Mes Services</h2>
-    <div class="services">
-      <div class="service">
-        <i class="fa-solid fa-code"></i>
-        <span>Développement d'Apps Cross-Platform (Flutter & Android)</span>
-      </div>
-      <div class="service">
-        <i class="fa-solid fa-database"></i>
-        <span>Intégration Backend (Supabase & Firebase)</span>
-      </div>
-      <div class="service">
-        <i class="fa-solid fa-paint-brush"></i>
-        <span>Design UI/UX épuré et ergonomique</span>
-      </div>
-      <div class="service">
-        <i class="fa-solid fa-cloud-arrow-up"></i>
-        <span>Publication et maintenance Play Store</span>
-      </div>
-    </div>
+    <!-- CURSUS & EXPÉRIENCE -->
+    <div class="grid-duo">
+      
+      <!-- Éducation -->
+      <div class="info-card">
+        <h3><i class="fa-solid fa-graduation-cap"></i> Cursus Académique</h3>
+        
+        <div class="timeline-item">
+          <h4>Licence de Mathématiques</h4>
+          <span>2024 - 2025</span>
+          <p>Université Nazi Boni de Bobo-Dioulasso (Burkina Faso)</p>
+        </div>
 
-    <!-- ===== CONTACT ===== -->
-    <h2 id="contact"><i class="fa-solid fa-paper-plane" style="color:var(--primary);"></i> Contactons-nous</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p><strong><i class="fa-solid fa-envelope"></i> Email :</strong><br>souleymanesk01@gmail.com</p>
-        <p><strong><i class="fa-solid fa-location-dot"></i> Localisation :</strong><br>Bobo-Dioulasso, Burkina Faso</p>
-        <p style="margin-top:20px; font-size:0.95rem; color:var(--text-muted);">
-          Ouvert aux opportunités en freelance, aux collaborations sur des projets innovants et au développement de startups.
-        </p>
+        <div class="timeline-item">
+          <h4>DEUG 2 Mathématiques-Physique-Informatique</h4>
+          <span>2023 - 2024</span>
+          <p>Université Nazi Boni de Bobo-Dioulasso</p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Baccalauréat Série D</h4>
+          <span>2019 - 2020</span>
+          <p>Lycée moderne Duékoué (Côte d'Ivoire)</p>
+        </div>
       </div>
 
-      <div class="contact-form">
-        <form onsubmit="handleSubmit(event)">
-          <input type="text" placeholder="Votre Nom" required>
-          <input type="email" placeholder="Votre Email" required>
-          <textarea rows="4" placeholder="Votre Message..." required></textarea>
-          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Envoyer le message</button>
-        </form>
+      <!-- Expérience & Compétences -->
+      <div class="info-card">
+        <h3><i class="fa-solid fa-briefcase"></i> Expérience & Compétences</h3>
+        
+        <div class="timeline-item">
+          <h4>Développeur d'Applications Mobiles</h4>
+          <span>2024 - Aujourd'hui</span>
+          <p>Conception d'applications éducatives et utilitaires (Boursy, Fasojob, Docmark, etc.).</p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Surveillance d'évaluations universitaires</h4>
+          <span>Juillet 2025 - Mars 2026</span>
+          <p>Expérience acquise au sein de l'UFR/SEA et de l'ESI.</p>
+        </div>
+
+        <h4 style="margin-top: 25px; margin-bottom: 10px; font-size: 1.05rem;">Stack technique & Atouts</h4>
+        <div class="skills-pills">
+          <div class="skill-pill">Flutter / Dart</div>
+          <div class="skill-pill">HTML / CSS / JS</div>
+          <div class="skill-pill">PHP / MySQL</div>
+          <div class="skill-pill">Mathématiques & Analyse</div>
+          <div class="skill-pill">Rigueur & Discipline</div>
+        </div>
       </div>
+
     </div>
+
+    <!-- FOOTER -->
+    <footer>
+      © 2026 Souleymane Kaghambega • Tous droits réservés.
+    </footer>
 
   </div>
 
-  <footer>
-    © 2026 Souleymane Kaghambega • Fait avec passion en Flutter & Web
-  </footer>
-
-</div>
-
-<script>
-  // Gestion du Mode Sombre / Clair dynamique
-  function toggleTheme() {
-    const html = document.documentElement;
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
-
-    if (html.getAttribute('data-theme') === 'light') {
-      html.setAttribute('data-theme', 'dark');
-      themeIcon.className = 'fa-solid fa-sun';
-      themeText.textContent = 'Mode Clair';
-    } else {
-      html.setAttribute('data-theme', 'light');
-      themeIcon.className = 'fa-solid fa-moon';
-      themeText.textContent = 'Mode Sombre';
-    }
-  }
-
-  // Filtrage dynamique des applications
-  function filterApps(category) {
-    const buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-
-    const apps = document.querySelectorAll('.app');
-    apps.forEach(app => {
-      if (category === 'all' || app.getAttribute('data-category') === category) {
-        app.style.display = 'flex';
+  <script>
+    // Gestion du Mode Sombre / Clair
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('themeIcon');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        themeIcon.className = 'fa-solid fa-sun';
       } else {
-        app.style.display = 'none';
+        html.setAttribute('data-theme', 'dark');
+        themeIcon.className = 'fa-solid fa-moon';
       }
-    });
-  }
+    }
 
-  // Simulation d'envoi du formulaire de contact
-  function handleSubmit(event) {
-    event.preventDefault();
-    alert('Merci ! Votre message a bien été simulé et pris en compte. Vous pouvez aussi m\'écrire directement par email.');
-    event.target.reset();
-  }
-</script>
+    // Filtrage dynamique des projets
+    function filterProjects(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-category');
+        if (category === 'all' || categories.includes(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
